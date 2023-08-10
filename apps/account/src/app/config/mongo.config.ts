@@ -11,16 +11,20 @@ export const getMongoConfig = (): MongooseModuleAsyncOptions => {
   };
 };
 
-const getMongoString = (configService: ConfigService) =>
-  'mongodb://' +
-  configService.get('MONGO_LOGIN') +
-  ':' +
-  configService.get('MONGO_PASSWORD') +
-  '@' +
-  configService.get('MONGO_HOST') +
-  ':' +
-  configService.get('MONGO_PORT') +
-  '/' +
-  configService.get('MONGO_DATABASE') +
-  '?authSource=' +
-  configService.get('MONGO_AUTHDATABASE');
+const getMongoString = (configService: ConfigService) => {
+  const pathMongo =
+    'mongodb://' +
+    configService.get('MONGO_LOGIN') +
+    ':' +
+    configService.get('MONGO_PASSWORD') +
+    '@' +
+    configService.get('MONGO_HOST') +
+    ':' +
+    configService.get('MONGO_PORT') +
+    '/' +
+    configService.get('MONGO_DATABASE') +
+    '?authSource=' +
+    configService.get('MONGO_AUTHDATABASE');
+  console.log('pathMongo: ' + pathMongo);
+  return pathMongo;
+};
