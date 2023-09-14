@@ -1,4 +1,4 @@
-import { AccountLogin } from '@hp/contracts';
+import { AccountLogin, AccountRegister } from '@hp/contracts';
 import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
 import { RMQService } from 'nestjs-rmq';
 import { LoginDTO } from '../dtos/login.dto';
@@ -12,9 +12,9 @@ export class AuthController {
   async register(@Body() dto: RegisterDTO) {
     try {
       return await this.rmqService.send<
-        AccountLogin.Request,
-        AccountLogin.Response
-      >(AccountLogin.topic, dto);
+        AccountRegister.Request,
+        AccountRegister.Response
+      >(AccountRegister.topic, dto);
     } catch (e) {
       if (e instanceof Error) {
         throw new UnauthorizedException(e.message);
